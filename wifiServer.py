@@ -9,11 +9,12 @@ server.listen(5)
 
 def client_handler(client_socket):
     request = client_socket.recv(100)
-    print ("Received:" + request)
+    requestDecoded = request.decode('utf-8')
+    print ("Received:" + requestDecoded)
     client_socket.close()
 
 while True:
     client, addr = server.accept()
-    print ("Accepting connection from " + addr[0] + addr[1]
+    print ("Accepting connection from " + str(addr[0]) + str(addr[1]))
     servert = threading.Thread(target=client_handler, args=(client,))
     servert.start()
